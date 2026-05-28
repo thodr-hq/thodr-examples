@@ -168,7 +168,7 @@ See [curl-examples/](curl-examples/) for more.
 - **Website** — [thodr.com](https://thodr.com)
 - **Interactive demo** — [thodr.com/demo](https://thodr.com/demo)
 - **Documentation** — [thodr.com/docs](https://thodr.com/docs/getting-started)
-- **Pricing** — [thodr.com](https://thodr.com#pricing)
+- **Pricing** — [thodr.com](https://thodr.com/#pricing)
 - **Changelog** — [thodr.com/changelog](https://thodr.com/changelog)
 - **Status** — [thodr.com/status](https://thodr.com/status)
 - **Developer tools** — [thodr.com/tools](https://thodr.com/tools)
