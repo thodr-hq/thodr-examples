@@ -1,0 +1,220 @@
+openapi: "3.0.3"
+info:
+  title: Auth API
+  description: |
+    A standard authentication API mock. Covers registration, login, token
+    refresh, email verification, and password reset flows.
+    Import into Thodr to get a working auth mock in seconds.
+  version: "1.0.0"
+  contact:
+    name: Thodr
+    url: https://thodr.com
+
+servers:
+  - url: https://thodr.com/mock/{project-slug}
+    description: Your Thodr mock server
+
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      operationId: register
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              email: "newuser@example.com"
+              password: "securePassword123"
+              name: "Jane Doe"
+      responses:
+        "201":
+          description: User created
+          content:
+            application/json:
+              example:
+                access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                token_type: "bearer"
+                user:
+                  id: "usr_new_001"
+                  email: "newuser@example.com"
+                  name: "Jane Doe"
+                  is_verified: false
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              example:
+                error:
+                  code: "VALIDATION_ERROR"
+                  message: "Email already registered."
+
+  /auth/login:
+    post:
+      summary: Login with credentials
+      operationId: login
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              email: "jane@example.com"
+              password: "securePassword123"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              example:
+                access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                token_type: "bearer"
+                expires_in: 1200
+                user:
+                  id: "usr_42"
+                  email: "jane@example.com"
+                  name: "Jane Doe"
+                  plan: "pro"
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              example:
+                error:
+                  code: "INVALID_CREDENTIALS"
+                  message: "Email or password is incorrect."
+
+  /auth/refresh:
+    post:
+      summary: Refresh access token
+      operationId: refreshToken
+      tags: [Auth]
+      responses:
+        "200":
+          description: New access token
+          content:
+            application/json:
+              example:
+                access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.new..."
+                token_type: "bearer"
+                expires_in: 1200
+        "401":
+          description: Refresh token expired
+          content:
+            application/json:
+              example:
+                error:
+                  code: "TOKEN_EXPIRED"
+                  message: "Refresh token has expired. Please log in again."
+
+  /auth/me:
+    get:
+      summary: Get current user
+      operationId: getMe
+      tags: [Auth]
+      responses:
+        "200":
+          description: Current user profile
+          content:
+            application/json:
+              example:
+                id: "usr_42"
+                email: "jane@example.com"
+                name: "Jane Doe"
+                plan: "pro"
+                is_verified: true
+                avatar_url: "https://avatars.example.com/jane.jpg"
+                created_at: "2025-11-01T08:00:00Z"
+        "401":
+          description: Not authenticated
+          content:
+            application/json:
+              example:
+                error:
+                  code: "UNAUTHORIZED"
+                  message: "Authentication required."
+
+  /auth/verify:
+    post:
+      summary: Verify email address
+      operationId: verifyEmail
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              email: "jane@example.com"
+              code: "482916"
+      responses:
+        "200":
+          description: Email verified
+          content:
+            application/json:
+              example:
+                verified: true
+        "400":
+          description: Invalid code
+          content:
+            application/json:
+              example:
+                error:
+                  code: "INVALID_CODE"
+                  message: "Verification code is invalid or expired."
+
+  /auth/forgot-password:
+    post:
+      summary: Request password reset
+      operationId: forgotPassword
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              email: "jane@example.com"
+      responses:
+        "200":
+          description: Reset email sent (always returns 200 to prevent enumeration)
+          content:
+            application/json:
+              example:
+                message: "If an account exists with that email, a reset link has been sent."
+
+  /auth/reset-password:
+    post:
+      summary: Reset password with token
+      operationId: resetPassword
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              token: "reset_abc123def456"
+              new_password: "newSecurePassword456"
+      responses:
+        "200":
+          description: Password reset successful
+          content:
+            application/json:
+              example:
+                message: "Password has been reset successfully."
+        "400":
+          description: Invalid or expired token
+          content:
+            application/json:
+              example:
+                error:
+                  code: "INVALID_TOKEN"
+                  message: "Reset token is invalid or has expired."
+
+  /auth/logout:
+    post:
+      summary: Logout (revoke refresh token)
+      operationId: logout
+      tags: [Auth]
+      responses:
+        "204":
+          description: Logged out successfully

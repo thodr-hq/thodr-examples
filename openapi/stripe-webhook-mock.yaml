@@ -1,0 +1,146 @@
+openapi: "3.0.3"
+info:
+  title: Stripe Webhook Mock
+  description: |
+    Mock endpoints that simulate Stripe webhook event payloads.
+    Useful for testing your webhook handler without triggering real Stripe events.
+
+    Import into Thodr, then point your local webhook handler at the mock URL
+    to test event processing logic.
+  version: "1.0.0"
+  contact:
+    name: Thodr
+    url: https://thodr.com
+
+servers:
+  - url: https://thodr.com/mock/{project-slug}
+    description: Your Thodr mock server
+
+paths:
+  /webhooks/checkout-completed:
+    get:
+      summary: Simulate checkout.session.completed event
+      operationId: checkoutCompleted
+      tags: [Webhook Events]
+      responses:
+        "200":
+          description: Checkout completed event payload
+          content:
+            application/json:
+              example:
+                id: "evt_1abc123"
+                type: "checkout.session.completed"
+                data:
+                  object:
+                    id: "cs_test_abc123"
+                    mode: "subscription"
+                    customer: "cus_42"
+                    subscription: "sub_001"
+                    payment_status: "paid"
+                    metadata:
+                      user_id: "usr_42"
+                      plan: "pro"
+                created: 1716652800
+
+  /webhooks/subscription-updated:
+    get:
+      summary: Simulate customer.subscription.updated event
+      operationId: subscriptionUpdated
+      tags: [Webhook Events]
+      responses:
+        "200":
+          description: Subscription updated event payload
+          content:
+            application/json:
+              example:
+                id: "evt_2def456"
+                type: "customer.subscription.updated"
+                data:
+                  object:
+                    id: "sub_001"
+                    customer: "cus_42"
+                    status: "active"
+                    current_period_end: 1719331200
+                    items:
+                      data:
+                        - price:
+                            id: "price_pro_monthly"
+                            unit_amount: 900
+                            currency: "usd"
+                    metadata:
+                      user_id: "usr_42"
+                      plan: "pro"
+                created: 1716652800
+
+  /webhooks/subscription-deleted:
+    get:
+      summary: Simulate customer.subscription.deleted event
+      operationId: subscriptionDeleted
+      tags: [Webhook Events]
+      responses:
+        "200":
+          description: Subscription deleted event payload
+          content:
+            application/json:
+              example:
+                id: "evt_3ghi789"
+                type: "customer.subscription.deleted"
+                data:
+                  object:
+                    id: "sub_001"
+                    customer: "cus_42"
+                    status: "canceled"
+                    canceled_at: 1716739200
+                    metadata:
+                      user_id: "usr_42"
+                      plan: "pro"
+                created: 1716739200
+
+  /webhooks/payment-failed:
+    get:
+      summary: Simulate invoice.payment_failed event
+      operationId: paymentFailed
+      tags: [Webhook Events]
+      responses:
+        "200":
+          description: Payment failed event payload
+          content:
+            application/json:
+              example:
+                id: "evt_4jkl012"
+                type: "invoice.payment_failed"
+                data:
+                  object:
+                    id: "in_001"
+                    customer: "cus_42"
+                    subscription: "sub_001"
+                    amount_due: 900
+                    currency: "usd"
+                    status: "open"
+                    attempt_count: 2
+                    next_payment_attempt: 1716825600
+                created: 1716739200
+
+  /webhooks/payment-succeeded:
+    get:
+      summary: Simulate invoice.payment_succeeded event
+      operationId: paymentSucceeded
+      tags: [Webhook Events]
+      responses:
+        "200":
+          description: Payment succeeded event payload
+          content:
+            application/json:
+              example:
+                id: "evt_5mno345"
+                type: "invoice.payment_succeeded"
+                data:
+                  object:
+                    id: "in_002"
+                    customer: "cus_42"
+                    subscription: "sub_001"
+                    amount_paid: 900
+                    currency: "usd"
+                    status: "paid"
+                    hosted_invoice_url: "https://invoice.stripe.com/i/acct_123/test_456"
+                created: 1716652800

@@ -1,0 +1,17 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Node (if examples use it later)
+node_modules/
+dist/
+
+# Environment
+.env
+.env.local

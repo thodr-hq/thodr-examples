@@ -1,0 +1,282 @@
+openapi: "3.0.3"
+info:
+  title: Payments API
+  description: |
+    A payments/billing mock API. Covers charges, refunds, customers, and
+    payment methods. Useful for testing checkout flows, billing dashboards,
+    and payment integrations without hitting a real payment provider.
+  version: "1.0.0"
+  contact:
+    name: Thodr
+    url: https://thodr.com
+
+servers:
+  - url: https://thodr.com/mock/{project-slug}
+    description: Your Thodr mock server
+
+paths:
+  /payments/charges:
+    get:
+      summary: List charges
+      operationId: listCharges
+      tags: [Charges]
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [succeeded, pending, failed]
+      responses:
+        "200":
+          description: Charge list
+          content:
+            application/json:
+              example:
+                data:
+                  - id: "ch_001"
+                    amount: 4999
+                    currency: "usd"
+                    status: "succeeded"
+                    customer_id: "cus_42"
+                    description: "Pro plan subscription"
+                    created_at: "2026-05-01T10:00:00Z"
+                  - id: "ch_002"
+                    amount: 2999
+                    currency: "usd"
+                    status: "succeeded"
+                    customer_id: "cus_43"
+                    description: "Team plan subscription"
+                    created_at: "2026-05-15T14:30:00Z"
+                has_more: false
+
+    post:
+      summary: Create a charge
+      operationId: createCharge
+      tags: [Charges]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              amount: 9900
+              currency: "usd"
+              customer_id: "cus_42"
+              payment_method_id: "pm_card_visa"
+              description: "Annual Pro plan"
+      responses:
+        "201":
+          description: Charge created
+          content:
+            application/json:
+              example:
+                id: "ch_003"
+                amount: 9900
+                currency: "usd"
+                status: "succeeded"
+                customer_id: "cus_42"
+                payment_method_id: "pm_card_visa"
+                description: "Annual Pro plan"
+                created_at: "2026-05-25T12:00:00Z"
+        "402":
+          description: Payment failed
+          content:
+            application/json:
+              example:
+                error:
+                  code: "CARD_DECLINED"
+                  message: "Your card was declined. Please try a different payment method."
+
+  /payments/charges/{id}:
+    get:
+      summary: Get charge details
+      operationId: getCharge
+      tags: [Charges]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Charge details
+          content:
+            application/json:
+              example:
+                id: "ch_001"
+                amount: 4999
+                currency: "usd"
+                status: "succeeded"
+                customer_id: "cus_42"
+                payment_method_id: "pm_card_visa"
+                description: "Pro plan subscription"
+                receipt_url: "https://receipts.example.com/ch_001"
+                created_at: "2026-05-01T10:00:00Z"
+
+  /payments/refunds:
+    post:
+      summary: Create a refund
+      operationId: createRefund
+      tags: [Refunds]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              charge_id: "ch_001"
+              amount: 4999
+              reason: "requested_by_customer"
+      responses:
+        "201":
+          description: Refund created
+          content:
+            application/json:
+              example:
+                id: "re_001"
+                charge_id: "ch_001"
+                amount: 4999
+                currency: "usd"
+                status: "succeeded"
+                reason: "requested_by_customer"
+                created_at: "2026-05-26T09:00:00Z"
+
+  /payments/customers:
+    get:
+      summary: List customers
+      operationId: listCustomers
+      tags: [Customers]
+      responses:
+        "200":
+          description: Customer list
+          content:
+            application/json:
+              example:
+                data:
+                  - id: "cus_42"
+                    email: "jane@example.com"
+                    name: "Jane Doe"
+                    created_at: "2025-11-01T08:00:00Z"
+                  - id: "cus_43"
+                    email: "bob@example.com"
+                    name: "Bob Smith"
+                    created_at: "2026-01-15T10:30:00Z"
+
+    post:
+      summary: Create a customer
+      operationId: createCustomer
+      tags: [Customers]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              email: "newcustomer@example.com"
+              name: "Alice Johnson"
+      responses:
+        "201":
+          description: Customer created
+          content:
+            application/json:
+              example:
+                id: "cus_44"
+                email: "newcustomer@example.com"
+                name: "Alice Johnson"
+                created_at: "2026-05-25T12:00:00Z"
+
+  /payments/customers/{id}:
+    get:
+      summary: Get customer details
+      operationId: getCustomer
+      tags: [Customers]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Customer details
+          content:
+            application/json:
+              example:
+                id: "cus_42"
+                email: "jane@example.com"
+                name: "Jane Doe"
+                default_payment_method: "pm_card_visa"
+                total_spent: 14998
+                currency: "usd"
+                charges_count: 3
+                created_at: "2025-11-01T08:00:00Z"
+
+  /payments/payment-methods:
+    get:
+      summary: List payment methods for a customer
+      operationId: listPaymentMethods
+      tags: [Payment Methods]
+      parameters:
+        - name: customer_id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Payment methods
+          content:
+            application/json:
+              example:
+                data:
+                  - id: "pm_card_visa"
+                    type: "card"
+                    card:
+                      brand: "visa"
+                      last4: "4242"
+                      exp_month: 12
+                      exp_year: 2027
+                    is_default: true
+                  - id: "pm_card_mastercard"
+                    type: "card"
+                    card:
+                      brand: "mastercard"
+                      last4: "8210"
+                      exp_month: 3
+                      exp_year: 2028
+                    is_default: false
+
+  /payments/subscriptions:
+    get:
+      summary: List subscriptions
+      operationId: listSubscriptions
+      tags: [Subscriptions]
+      parameters:
+        - name: customer_id
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [active, canceled, past_due]
+      responses:
+        "200":
+          description: Subscription list
+          content:
+            application/json:
+              example:
+                data:
+                  - id: "sub_001"
+                    customer_id: "cus_42"
+                    plan: "pro"
+                    status: "active"
+                    amount: 900
+                    currency: "usd"
+                    interval: "month"
+                    current_period_end: "2026-06-01T00:00:00Z"
+                    created_at: "2025-11-01T08:00:00Z"
