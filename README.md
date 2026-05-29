@@ -16,7 +16,7 @@ Thodr is a hosted platform for creating, managing, and sharing mock APIs.
 You get a permanent URL like:
 
 ```
-https://thodr.com/mock/your-project/users/42
+https://thodr.com/api/mock/your-project/users/42
 ```
 
 That works immediately — share it with your team, plug it into CI, or use it in staging. No infrastructure to manage.
@@ -71,7 +71,7 @@ thodr-examples/
 ├── openapi/              # OpenAPI specs ready to import
 │   ├── ecommerce-api.yaml
 │   ├── auth-api.yaml
-│   ├── payments-api.yaml
+│   ├── stripe-mock.yaml
 │   └── stripe-webhook-mock.yaml
 ├── examples/             # Endpoint configuration examples
 │   ├── ecommerce-api/
@@ -83,8 +83,11 @@ thodr-examples/
 │   └── auth.collection.json
 ├── curl-examples/        # Copy-paste curl commands
 │   ├── auth.md
-│   ├── payments.md
-│   └── scenarios.md
+│   ├── stripe-mock.md
+│   ├── scenarios.md
+│   ├── dynamic-matching.md
+│   ├── templating.md
+│   └── proxy-forwarding.md
 └── screenshots/          # Real product screenshots
     ├── dashboard.jpeg
     ├── logs.jpeg
@@ -102,7 +105,7 @@ Import any of these specs into Thodr to instantly generate a full mock API:
 | ------------------------------------------------------------ | --------- | -------------------------------- |
 | [ecommerce-api.yaml](openapi/ecommerce-api.yaml)             | 12        | Products, orders, cart, users    |
 | [auth-api.yaml](openapi/auth-api.yaml)                       | 8         | Register, login, refresh, verify |
-| [payments-api.yaml](openapi/payments-api.yaml)               | 9         | Charges, refunds, customers      |
+| [stripe-mock.yaml](openapi/stripe-mock.yaml)                 | 3         | Payment intents, charges         |
 | [stripe-webhook-mock.yaml](openapi/stripe-webhook-mock.yaml) | 5         | Webhook event simulation         |
 
 ### How to import
@@ -120,15 +123,15 @@ Test any Thodr mock endpoint directly:
 
 ```bash
 # Get a user
-curl https://thodr.com/mock/your-project/users/42
+curl https://thodr.com/api/mock/your-project/users/42
 
 # Create an order
-curl -X POST https://thodr.com/mock/your-project/orders \
+curl -X POST https://thodr.com/api/mock/your-project/orders \
   -H "Content-Type: application/json" \
   -d '{"product_id": "prod_123", "quantity": 2}'
 
 # Simulate an error (with scenario switching)
-curl https://thodr.com/mock/your-project/users/999
+curl https://thodr.com/api/mock/your-project/users/999
 # → 404 Not Found (if scenario is configured)
 ```
 
@@ -170,8 +173,10 @@ See [curl-examples/](curl-examples/) for more.
 - **Documentation** — [thodr.com/docs](https://thodr.com/docs/getting-started)
 - **Pricing** — [thodr.com](https://thodr.com/#pricing)
 - **Changelog** — [thodr.com/changelog](https://thodr.com/changelog)
-- **Status** — [thodr.com/status](https://thodr.com/status)
-- **Developer tools** — [thodr.com/tools](https://thodr.com/tools)
+- **Developer tools** — [thodr.com/tools](https://thodr.com/tools) (JSON/YAML converters, GraphQL Validator, cURL converter, etc.)
+- **Competitor Comparisons** — [Postman Alternative](https://thodr.com/compare/postman) · [MSW Alternative](https://thodr.com/compare/msw) · [WireMock Alternative](https://thodr.com/compare/wiremock)
+- **Framework Guides** — [React](https://thodr.com/guides/react) · [Next.js](https://thodr.com/guides/nextjs) · [GitHub Actions](https://thodr.com/guides/github-actions)
+- **API Templates** — [Stripe Mock API](https://thodr.com/templates/stripe-mock) · [E-commerce Mock API](https://thodr.com/templates/ecommerce) · [Auth Mock API](https://thodr.com/templates/auth-api)
 
 ---
 

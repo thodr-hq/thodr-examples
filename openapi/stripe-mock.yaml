@@ -1,0 +1,67 @@
+openapi: "3.0.3"
+info:
+  title: Stripe Mock API
+  description: Mock Stripe API for testing checkout flows. Provides standard Stripe endpoints.
+  version: "1.0.0"
+servers:
+  - url: https://thodr.com/api/mock/{project-slug}
+paths:
+  /v1/payment_intents:
+    post:
+      summary: Create a PaymentIntent
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            example:
+              amount: 2000
+              currency: usd
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                id: pi_123
+                object: payment_intent
+                amount: 2000
+                currency: usd
+                status: requires_payment_method
+                client_secret: pi_123_secret_456
+  /v1/payment_intents/{intent}:
+    get:
+      summary: Retrieve a PaymentIntent
+      parameters:
+        - name: intent
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                id: pi_123
+                object: payment_intent
+                amount: 2000
+                currency: usd
+                status: succeeded
+  /v1/charges:
+    get:
+      summary: List all Charges
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                object: list
+                data:
+                  - id: ch_123
+                    object: charge
+                    amount: 2000
+                    currency: usd
+                    status: succeeded
+                    paid: true

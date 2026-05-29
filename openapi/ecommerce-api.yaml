@@ -10,7 +10,7 @@ info:
     url: https://thodr.com
 
 servers:
-  - url: https://thodr.com/mock/{project-slug}
+  - url: https://thodr.com/api/mock/{project-slug}
     description: Your Thodr mock server
 
 paths:

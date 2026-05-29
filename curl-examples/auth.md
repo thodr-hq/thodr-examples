@@ -5,7 +5,7 @@ Replace `your-project` with your actual Thodr project slug.
 ## Register
 
 ```bash
-curl -X POST https://thodr.com/mock/your-project/auth/register \
+curl -X POST https://thodr.com/api/mock/your-project/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "email": "newuser@example.com",
@@ -32,7 +32,7 @@ curl -X POST https://thodr.com/mock/your-project/auth/register \
 ## Login
 
 ```bash
-curl -X POST https://thodr.com/mock/your-project/auth/login \
+curl -X POST https://thodr.com/api/mock/your-project/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "jane@example.com",
@@ -53,7 +53,7 @@ curl -X POST https://thodr.com/mock/your-project/auth/login \
 ## Get current user
 
 ```bash
-curl https://thodr.com/mock/your-project/auth/me \
+curl https://thodr.com/api/mock/your-project/auth/me \
   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIs..."
 ```
 
@@ -72,7 +72,7 @@ curl https://thodr.com/mock/your-project/auth/me \
 ## Forgot password
 
 ```bash
-curl -X POST https://thodr.com/mock/your-project/auth/forgot-password \
+curl -X POST https://thodr.com/api/mock/your-project/auth/forgot-password \
   -H "Content-Type: application/json" \
   -d '{"email": "jane@example.com"}'
 ```
