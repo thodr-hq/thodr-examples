@@ -26,7 +26,7 @@ You're building a webhook handler (e.g., for Stripe, GitHub, or any third-party 
 
 ```bash
 # Fetch a mock event payload
-EVENT=$(curl -s https://thodr.com/api/mock/your-project/webhooks/checkout-completed)
+EVENT=$(curl -s https://thodr.com/mock/your-project/webhooks/checkout-completed)
 
 # Forward it to your local handler
 curl -X POST http://localhost:3000/api/webhooks/stripe \

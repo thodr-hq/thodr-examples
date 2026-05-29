@@ -15,7 +15,7 @@ Switch between them to test different states without changing your code.
 ### Default response (200 OK)
 
 ```bash
-curl https://thodr.com/api/mock/your-project/users/42
+curl https://thodr.com/mock/your-project/users/42
 ```
 
 ```json
@@ -30,7 +30,7 @@ curl https://thodr.com/api/mock/your-project/users/42
 ### After activating "Not Found" scenario (404)
 
 ```bash
-curl -i https://thodr.com/api/mock/your-project/users/42
+curl -i https://thodr.com/mock/your-project/users/42
 ```
 
 ```
@@ -48,7 +48,7 @@ Content-Type: application/json
 ### After activating "Server Error" scenario (500)
 
 ```bash
-curl -i https://thodr.com/api/mock/your-project/users/42
+curl -i https://thodr.com/mock/your-project/users/42
 ```
 
 ```
@@ -70,7 +70,7 @@ Add a delay to any endpoint or scenario:
 ```bash
 # This endpoint has a 2000ms delay configured in Thodr
 curl -w "\nTotal time: %{time_total}s\n" \
-  https://thodr.com/api/mock/your-project/users/42
+  https://thodr.com/mock/your-project/users/42
 ```
 
 ```
@@ -90,11 +90,11 @@ If your project has API key protection enabled:
 
 ```bash
 # Without API key — rejected
-curl -i https://thodr.com/api/mock/your-project/users/42
+curl -i https://thodr.com/mock/your-project/users/42
 # → 401 Unauthorized
 
 # With API key — works
-curl https://thodr.com/api/mock/your-project/users/42 \
+curl https://thodr.com/mock/your-project/users/42 \
   -H "X-Api-Key: thodr_your_api_key_here"
 # → 200 OK
 ```
