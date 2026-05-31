@@ -25,6 +25,7 @@ That works immediately — share it with your team, plug it into CI, or use it i
 
 - **Instant hosted endpoints** — live URL in under 30 seconds
 - **OpenAPI import** — paste a spec, auto-generate all endpoints
+- **Contract testing** — auto-detect upstream API breaking changes
 - **Scenario switching** — toggle between success, error, timeout responses
 - **Request logs** — every request captured with headers, body, latency
 - **Environment isolation** — dev, staging, QA under one project
@@ -33,6 +34,7 @@ That works immediately — share it with your team, plug it into CI, or use it i
 - **Webhook forwarding** — forward requests to real upstream URLs
 - **Response templating** — dynamic responses with path/query variables
 - **Delay simulation** — artificial latency for timeout testing
+- **CI/CD integration** — fail builds on contract violations
 
 ---
 
@@ -83,7 +85,9 @@ thodr-examples/
 │   └── auth.collection.json
 ├── curl-examples/        # Copy-paste curl commands
 │   ├── auth.md
+│   ├── contract-testing.md
 │   ├── payments.md
+│   ├── proxy-forwarding.md
 │   └── scenarios.md
 └── screenshots/          # Real product screenshots
     ├── dashboard.png
@@ -150,16 +154,18 @@ See [curl-examples/](curl-examples/) for more.
 
 ## Key differentiators
 
-|                | Thodr           | Local mock servers    | Postman mocks           |
-| -------------- | --------------- | --------------------- | ----------------------- |
-| Setup time     | 30 seconds      | 10–30 minutes         | 5 minutes               |
-| Infrastructure | None (hosted)   | Docker/Node required  | Postman account         |
-| Stable URLs    | ✅ Permanent    | ❌ Changes on restart | ✅ But rate-limited     |
-| Team sharing   | ✅ Built-in     | ❌ Manual             | ✅ But workspace-locked |
-| Request logs   | ✅ Built-in     | ❌ DIY                | ⚠️ Limited              |
-| Scenarios      | ✅ Per-endpoint | ❌ Code changes       | ⚠️ Limited              |
-| OpenAPI import | ✅ One-click    | ⚠️ Varies             | ✅                      |
-| Environments   | ✅ Built-in     | ❌ Manual             | ❌                      |
+|                  | Thodr           | Local mock servers    | Postman mocks           |
+| ---------------- | --------------- | --------------------- | ----------------------- |
+| Setup time       | 30 seconds      | 10–30 minutes         | 5 minutes               |
+| Infrastructure   | None (hosted)   | Docker/Node required  | Postman account         |
+| Stable URLs      | ✅ Permanent    | ❌ Changes on restart | ✅ But rate-limited     |
+| Team sharing     | ✅ Built-in     | ❌ Manual             | ✅ But workspace-locked |
+| Request logs     | ✅ Built-in     | ❌ DIY                | ⚠️ Limited              |
+| Scenarios        | ✅ Per-endpoint | ❌ Code changes       | ⚠️ Limited              |
+| Contract testing | ✅ Built-in     | ❌ Not available      | ⚠️ Separate tool        |
+| OpenAPI import   | ✅ One-click    | ⚠️ Varies             | ✅                      |
+| Environments     | ✅ Built-in     | ❌ Manual             | ❌                      |
+| CI/CD ready      | ✅ API + alerts | ❌ DIY                | ✅ Newman               |
 
 ---
 
