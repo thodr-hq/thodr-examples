@@ -4,7 +4,7 @@ info:
   description: Mock Stripe API for testing checkout flows. Provides standard Stripe endpoints.
   version: "1.0.0"
 servers:
-  - url: https://thodr.com/api/mock/{project-slug}
+  - url: https://thodr.com/mock/{project-slug}
 paths:
   /v1/payment_intents:
     post:

@@ -13,7 +13,7 @@ Create a project → add endpoints → get a live URL. Done.
 
 Thodr is a hosted platform for creating, managing, and sharing mock APIs.
 
-You get a permanent URL like:
+You get a stable, shareable URL like:
 
 ```
 https://thodr.com/mock/your-project/users/42
@@ -80,20 +80,21 @@ thodr-examples/
 │   ├── auth-api/
 │   ├── payments-api/
 │   └── webhook-api/
-├── postman/              # Postman collections for testing
-│   ├── ecommerce.collection.json
-│   └── auth.collection.json
+├── postman/              # (coming soon) Postman collections
 ├── curl-examples/        # Copy-paste curl commands
 │   ├── auth.md
 │   ├── contract-testing.md
+│   ├── dynamic-matching.md
 │   ├── payments.md
 │   ├── proxy-forwarding.md
-│   └── scenarios.md
+│   ├── scenarios.md
+│   ├── stripe-mock.md
+│   └── templating.md
 └── screenshots/          # Real product screenshots
-    ├── dashboard.png
-    ├── logs.png
-    ├── playground.png
-    └── openapi-import.png
+    ├── dashboard.jpeg
+    ├── logs.jpeg
+    ├── playground.jpeg
+    └── openapi-import.jpeg
 ```
 
 ---
@@ -140,15 +141,11 @@ See [curl-examples/](curl-examples/) for more.
 
 ---
 
-## Screenshots
+## See it in action
 
-| Dashboard                                | Request Logs                   |
-| ---------------------------------------- | ------------------------------ |
-| ![Dashboard](screenshots/dashboard.jpeg) | ![Logs](screenshots/logs.jpeg) |
+[![Watch the Thodr demo](screenshots/demo-poster.jpg)](https://thodr.com/demo)
 
-| Playground                                 | OpenAPI Import                             |
-| ------------------------------------------ | ------------------------------------------ |
-| ![Playground](screenshots/playground.jpeg) | ![Import](screenshots/openapi-import.jpeg) |
+▶️ **[Try the live interactive demo at thodr.com/demo](https://thodr.com/demo)** — call a real mock endpoint and see the response, no signup required.
 
 ---
 
@@ -158,7 +155,7 @@ See [curl-examples/](curl-examples/) for more.
 | ---------------- | --------------- | --------------------- | ----------------------- |
 | Setup time       | 30 seconds      | 10–30 minutes         | 5 minutes               |
 | Infrastructure   | None (hosted)   | Docker/Node required  | Postman account         |
-| Stable URLs      | ✅ Permanent    | ❌ Changes on restart | ✅ But rate-limited     |
+| Stable URLs      | ✅ Persistent   | ❌ Changes on restart | ✅ But rate-limited     |
 | Team sharing     | ✅ Built-in     | ❌ Manual             | ✅ But workspace-locked |
 | Request logs     | ✅ Built-in     | ❌ DIY                | ⚠️ Limited              |
 | Scenarios        | ✅ Per-endpoint | ❌ Code changes       | ⚠️ Limited              |

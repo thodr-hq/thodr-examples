@@ -8,17 +8,17 @@ Configure a scenario in Thodr with the condition header.x-test-error = true.
 
 When the header is omitted, you get the default success response:
 
-`ash
-curl https://thodr.com/api/mock/your-project/users/42
+```bash
+curl https://thodr.com/mock/your-project/users/42
 # -> 200 OK
-`
+```
 
 When the header is provided, the error scenario activates dynamically:
 
-`ash
-curl -H "x-test-error: true" https://thodr.com/api/mock/your-project/users/42
+```bash
+curl -H "x-test-error: true" https://thodr.com/mock/your-project/users/42
 # -> 500 Internal Server Error
-`
+```
 
 ## Supported Match Keys
 
@@ -26,4 +26,4 @@ curl -H "x-test-error: true" https://thodr.com/api/mock/your-project/users/42
 |---|---|
 | query.<param> | query.env = test |
 | header.<name> | header.authorization = secret |
-| ody_contains | ody_contains = admin |
+| body_contains | body_contains = admin |
