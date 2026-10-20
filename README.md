@@ -163,6 +163,39 @@ See [curl-examples/](curl-examples/) for more.
 
 ---
 
+## AI IDE integration (MCP)
+
+Thodr ships an [MCP](https://modelcontextprotocol.io) server,
+[`thodr-mcp`](https://pypi.org/project/thodr-mcp/), so AI coding assistants
+(Cursor, Claude Desktop, GitHub Copilot, or any MCP-compatible client) can
+create and manage your mock projects and endpoints straight from the editor.
+
+Create a Personal Access Token in the web app (**Settings → Access Tokens**),
+then add this to your IDE's MCP config:
+
+```json
+{
+  "mcpServers": {
+    "thodr": {
+      "command": "uvx",
+      "args": ["thodr-mcp"],
+      "env": {
+        "THODR_API_URL": "https://thodr.com/api",
+        "THODR_TOKEN": "thodr_pat_xxxxxxxxxxxxxxxxxxxx"
+      }
+    }
+  }
+}
+```
+
+Then ask your assistant to spin up a mock — e.g. *"create a Thodr project
+with a GET /users endpoint"* — and it returns a live mock URL. The server
+exposes five tools (`create_project`, `list_projects`, `add_endpoint`,
+`list_endpoints`, `get_mock_url`); it runs no AI itself and does `$0` of
+inference — your IDE supplies the model.
+
+---
+
 ## Key differentiators
 
 |                  | Thodr           | Local mock servers    | Postman mocks           |
@@ -185,6 +218,7 @@ See [curl-examples/](curl-examples/) for more.
 - **Website** — [thodr.com](https://thodr.com)
 - **Interactive demo** — [thodr.com/demo](https://thodr.com/demo)
 - **Documentation** — [thodr.com/docs](https://thodr.com/docs/getting-started)
+- **MCP server** — [thodr-mcp on PyPI](https://pypi.org/project/thodr-mcp/)
 - **Pricing** — [thodr.com](https://thodr.com#pricing)
 - **Changelog** — [thodr.com/changelog](https://thodr.com/changelog)
 - **Status** — [thodr.com/status](https://thodr.com/status)
