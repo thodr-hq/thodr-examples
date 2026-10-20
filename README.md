@@ -163,15 +163,15 @@ See [curl-examples/](curl-examples/) for more.
 
 ---
 
-## AI IDE integration (MCP)
+## Use it from your AI editor (MCP)
 
-Thodr ships an [MCP](https://modelcontextprotocol.io) server,
-[`thodr-mcp`](https://pypi.org/project/thodr-mcp/), so AI coding assistants
-(Cursor, Claude Desktop, GitHub Copilot, or any MCP-compatible client) can
-create and manage your mock projects and endpoints straight from the editor.
+Ask Cursor, Claude Desktop, or Copilot to build a mock and get a live URL
+back — no dashboard needed. Thodr's [MCP](https://modelcontextprotocol.io)
+server, [`thodr-mcp`](https://pypi.org/project/thodr-mcp/), wires your editor
+to your Thodr account.
 
-Create a Personal Access Token in the web app (**Settings → Access Tokens**),
-then add this to your IDE's MCP config:
+Create a Personal Access Token (**Settings → Access Tokens** in the web app),
+then add this to your editor's MCP config:
 
 ```json
 {
@@ -188,11 +188,8 @@ then add this to your IDE's MCP config:
 }
 ```
 
-Then ask your assistant to spin up a mock — e.g. *"create a Thodr project
-with a GET /users endpoint"* — and it returns a live mock URL. The server
-exposes five tools (`create_project`, `list_projects`, `add_endpoint`,
-`list_endpoints`, `get_mock_url`); it runs no AI itself and does `$0` of
-inference — your IDE supplies the model.
+Now ask: *"create a Thodr project with a GET /users endpoint that returns a
+sample user"* — and you get a live mock URL back, ready to hit.
 
 ---
 
