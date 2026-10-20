@@ -171,7 +171,9 @@ server, [`thodr-mcp`](https://pypi.org/project/thodr-mcp/), wires your editor
 to your Thodr account.
 
 Create a Personal Access Token (**Settings → Access Tokens** in the web app),
-then add this to your editor's MCP config:
+then add this to your editor's MCP config.
+
+> Requires [uv](https://docs.astral.sh/uv/) (it provides the `uvx` command).
 
 ```json
 {
@@ -214,7 +216,7 @@ sample user"* — and you get a live mock URL back, ready to hit.
 
 - **Website** — [thodr.com](https://thodr.com)
 - **Interactive demo** — [thodr.com/demo](https://thodr.com/demo)
-- **Documentation** — [thodr.com/docs](https://thodr.com/docs/getting-started)
+- **Documentation** — [thodr.com/docs/getting-started](https://thodr.com/docs/getting-started)
 - **MCP server** — [thodr-mcp on PyPI](https://pypi.org/project/thodr-mcp/)
 - **Pricing** — [thodr.com](https://thodr.com#pricing)
 - **Changelog** — [thodr.com/changelog](https://thodr.com/changelog)
