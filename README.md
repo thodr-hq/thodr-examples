@@ -119,9 +119,23 @@ Import any of these specs into Thodr to instantly generate a full mock API:
 
 ---
 
+## Try a live endpoint right now
+
+No signup needed — Thodr hosts a public, read-only demo mock you can call immediately:
+
+```bash
+curl https://thodr.com/mock/demo-public/users
+```
+
+You'll get back a real JSON response from a live Thodr mock endpoint. This is the
+same endpoint powering the "Run" demo on [thodr.com](https://thodr.com).
+
+---
+
 ## curl examples
 
-Test any Thodr mock endpoint directly:
+Once you've created your own project, test any Thodr mock endpoint directly
+(replace `your-project` with your project slug):
 
 ```bash
 # Get a user
