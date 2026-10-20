@@ -23,7 +23,7 @@ That works immediately — share it with your team, plug it into CI, or use it i
 
 ### Core capabilities
 
-- **Instant hosted endpoints** — live URL in under 30 seconds
+- **Instant hosted endpoints** — live URL in minutes
 - **OpenAPI import** — paste a spec, auto-generate all endpoints
 - **Contract testing** — auto-detect upstream API breaking changes
 - **Scenario switching** — toggle between success, error, timeout responses
@@ -145,7 +145,7 @@ See [curl-examples/](curl-examples/) for more.
 
 [![Watch the Thodr demo](screenshots/demo-poster.jpg)](https://thodr.com/demo)
 
-▶️ **[Try the live interactive demo at thodr.com/demo](https://thodr.com/demo)** — call a real mock endpoint and see the response, no signup required.
+▶️ **[Try the interactive demo at thodr.com/demo](https://thodr.com/demo)** — explore how Thodr works with an interactive example, no signup required.
 
 ---
 
@@ -153,7 +153,7 @@ See [curl-examples/](curl-examples/) for more.
 
 |                  | Thodr           | Local mock servers    | Postman mocks           |
 | ---------------- | --------------- | --------------------- | ----------------------- |
-| Setup time       | 30 seconds      | 10–30 minutes         | 5 minutes               |
+| Setup time       | Minutes         | 10–30 minutes         | 5 minutes               |
 | Infrastructure   | None (hosted)   | Docker/Node required  | Postman account         |
 | Stable URLs      | ✅ Persistent   | ❌ Changes on restart | ✅ But rate-limited     |
 | Team sharing     | ✅ Built-in     | ❌ Manual             | ✅ But workspace-locked |
