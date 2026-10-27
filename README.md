@@ -165,8 +165,8 @@ See [curl-examples/](curl-examples/) for more.
 
 ## Use it from your AI editor (MCP)
 
-Ask Cursor, Claude Desktop, or Copilot to build a mock and get a live URL
-back — no dashboard needed. Thodr's [MCP](https://modelcontextprotocol.io)
+Ask Cursor, Claude Desktop, Antigravity, or any MCP-compatible editor to build
+a mock and get a live URL back — no dashboard needed. Thodr's [MCP](https://modelcontextprotocol.io)
 server, [`thodr-mcp`](https://pypi.org/project/thodr-mcp/), wires your editor
 to your Thodr account.
 
@@ -193,6 +193,8 @@ then add this to your editor's MCP config.
 Now ask: *"create a Thodr project with a GET /users endpoint that returns a
 sample user"* — and you get a live mock URL back, ready to hit.
 
+Full setup guide, tools, and troubleshooting: [thodr.com/docs/mcp](https://thodr.com/docs/mcp)
+
 ---
 
 ## Key differentiators
@@ -218,6 +220,7 @@ sample user"* — and you get a live mock URL back, ready to hit.
 - **Interactive demo** — [thodr.com/demo](https://thodr.com/demo)
 - **Documentation** — [thodr.com/docs/getting-started](https://thodr.com/docs/getting-started)
 - **MCP server** — [thodr-mcp on PyPI](https://pypi.org/project/thodr-mcp/)
+- **MCP setup guide** — [thodr.com/docs/mcp](https://thodr.com/docs/mcp)
 - **Pricing** — [thodr.com](https://thodr.com#pricing)
 - **Changelog** — [thodr.com/changelog](https://thodr.com/changelog)
 - **Status** — [thodr.com/status](https://thodr.com/status)
